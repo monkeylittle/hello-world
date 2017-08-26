@@ -12,7 +12,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        docker.build('hello-world') 
+        docker.build('hello-world')
       }
     }
 
@@ -25,6 +25,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying...'
+        step([$class: 'WsCleanup'])
       }
     }
   }
