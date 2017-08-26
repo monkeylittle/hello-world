@@ -1,21 +1,26 @@
 
-node('node') {
+pipeline {
 
-  currentBuild.result = "SUCCESS"
+  agent any
 
-  stage('Checkout') {
-    checkout scm
-  }
+  stages {}
+    stage('Checkout') {
+      checkout scm
+    }
 
-  stage('Build') {
+    stage('Build') {
 
-  }
+      echo 'Building...'
+    }
 
-  stage('Test') {
+    stage('Test') {
 
-  }
+      echo 'Testing...'
+    }
 
-  start('Deploy') {
+    start('Deploy') {
 
+      echo 'Deploying...'
+    }
   }
 }
