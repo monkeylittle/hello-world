@@ -5,22 +5,27 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      checkout scm
+      steps {
+        checkout scm
+      }
     }
 
     stage('Build') {
-
-      echo 'Building...'
+      steps {
+        echo 'Building...'
+      }
     }
 
     stage('Test') {
-
-      echo 'Testing...'
+      steps {
+        echo 'Testing...'
+      }
     }
 
     start('Deploy') {
-
-      echo 'Deploying...'
+      steps {
+        echo 'Deploying...'
+      }
     }
   }
 }
