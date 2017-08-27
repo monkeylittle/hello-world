@@ -16,8 +16,9 @@ node {
 
   stage('Release')
 
-  // push docker image to docker hub
   echo 'Releasing to docker hub...'
+
+  // push docker image to docker hub
   docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
     app.push("${env.BUILD_NUMBER}")
     app.push("latest")
