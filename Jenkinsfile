@@ -1,32 +1,25 @@
 
-pipeline {
+node {
+  stage('Checkout')
 
-  agent any
+  checkout scm
+  // checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/monkeylittle/hello-world']]])
 
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
+  stage('Build')
 
-    stage('Build') {
-      steps {
-        docker.build('hello-world')
-      }
-    }
+  // build docker image
+  app = docker.build('johnturner/hello-world')
 
-    stage('Test') {
-      steps {
-        echo 'Testing...'
-      }
-    }
+  stage('Test')
 
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-        step([$class: 'WsCleanup'])
-      }
-    }
+  echo 'Testing...'
+
+  stage('Release')
+
+  // push docker image to docker hub
+  echo 'Deploying...'
+  docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+    app.push("${env.BUILD_NUMBER}")
+    app.push("latest")
   }
 }
