@@ -6,8 +6,12 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Hello world!")
 	io.WriteString(w, "Hello Dublin!")
+}
+
+func internalServerError(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, http.StatusText(http.StatusInternalServerError),
+				http.StatusInternalServerError)
 }
 
 func main() {
