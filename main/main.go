@@ -15,6 +15,6 @@ func internalServerError(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", hello)
+	http.HandleFunc("/", internalServerError)
 	http.ListenAndServe(":8000", nil)
 }
